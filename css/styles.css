@@ -8,5 +8,7 @@ body { height: 100%; margin: 0; padding: 0; }
     background-color: #fff;
     padding: 5px;
     border: 1px solid #999;
+    max-width: 250px;
+    word-wrap: break-word;
 }
 #map-canvas { height: 100%; }
