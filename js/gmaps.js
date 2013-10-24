@@ -54,6 +54,9 @@ function addLatLng(event) {
 
     path.push(event.latLng);
 
+    var encoded_path = google.maps.geometry.encoding.encodePath(path);
+
+
     var image = {
         url: 'images/marker.png',
         origin: new google.maps.Point(0, 0),
@@ -85,6 +88,8 @@ function addLatLng(event) {
     var resetButton = document.getElementById("clearmap")
     resetButton.disabled = false;
 
+    var encodedstring = document.getElementById("region-encoded");
+    encodedstring.innerHTML += encoded_path;
 
 }
 
@@ -119,3 +124,5 @@ function reset() {
     var resetButton = document.getElementById("clearmap")
     resetButton.disabled = true;
 }
+
+google.maps.event.addDomListener(window, 'load', initialize);
