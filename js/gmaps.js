@@ -20,6 +20,30 @@ function initialize() {
 	map = new google.maps.Map(document.getElementById("map-canvas"),
 		mapOptions);
 
+		//Using W3C Geolocation Standard
+	if(navigator.geolocation) {
+		browserSupportFlag = true;
+		navigator.geolocation.getCurrentPosition(function(position) {
+			initialLocation = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+			map.setCenter(initialLocation);
+
+			var infoWindow = new google.maps.InfoWindow({
+				map: map,
+				position: initialLocation,
+				content: 'Here you are!'
+			});
+
+			map.setCenter(initialLocation);
+		}, function() {
+			handleNoGeolocation(browserSupportFlag);
+		});
+	}
+	//No browser support for W3C standard
+	else {
+		browserSupportFlag = false;
+		handleNoGeolocation(browserSupportFlag);
+	}
+
 	var lineSymbol = {
 		path: 'M 0,-1 0,1',
 		strokeOpacity: 1,
@@ -89,6 +113,23 @@ function addLatLng(event) {
     encodedstring.innerHTML = encoded;
 
 
+}
+
+function handleNoGeolocation(errorFlag) {
+	if (errorFlag == true) {
+		var content = "Geolocation failed";
+	} else {
+		var content = "Geolocation not supported by your browser";
+	}
+
+	var options = {
+		map: map,
+		position: new google.maps.LatLng(38,-92),
+		content: content
+	};
+
+	var infowindow = new google.maps.InfoWindow(options);
+	map.setCenter(options.position);
 }
 
 function closeBoundary() {
