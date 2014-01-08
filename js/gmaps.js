@@ -12,10 +12,6 @@ var markers = [];
 function initialize() {
 	google.maps.visualRefresh = true;
 
-
-
-	
-
 		//Using W3C Geolocation Standard
 	if(navigator.geolocation) {
 		browserSupportFlag = true;
@@ -142,6 +138,18 @@ function closeBoundary() {
 	var path = poly.getPath();
 	path.push(markers[0].position);
 	google.maps.event.removeListener(listeners['mapclicks']);
+	
+	boundaryShaded = new google.maps.Polygon({
+		paths: path,
+		strokeColor: "#009900",
+		strokeOpacity: 0.8,
+		strokeWeight: 2,
+		fillColor: "#4DB84D",
+		fillOpacity: 0.5
+	});
+	
+	boundaryShaded.setMap(map);
+	
 }
 
 function setAllMap(map) {
