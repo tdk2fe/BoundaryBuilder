@@ -1,5 +1,6 @@
 var poly;
 var map;
+var defaultCenter;
 
 var listeners = [
 	'mapclicks',
@@ -11,14 +12,9 @@ var markers = [];
 function initialize() {
 	google.maps.visualRefresh = true;
 
-	var mapOptions = {
-		center: new google.maps.LatLng(38,-92),
-		zoom: 8,
-		mapTypeId: google.maps.MapTypeId.ROADMAP
-	};
 
-	map = new google.maps.Map(document.getElementById("map-canvas"),
-		mapOptions);
+
+	
 
 		//Using W3C Geolocation Standard
 	if(navigator.geolocation) {
@@ -43,6 +39,16 @@ function initialize() {
 		browserSupportFlag = false;
 		handleNoGeolocation(browserSupportFlag);
 	}
+	
+	var mapOptions = {
+		//center: new google.maps.LatLng(38,-92),
+		center: initialLocation,
+		zoom: 16,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	
+	map = new google.maps.Map(document.getElementById("map-canvas"),
+		mapOptions);
 
 	var lineSymbol = {
 		path: 'M 0,-1 0,1',
