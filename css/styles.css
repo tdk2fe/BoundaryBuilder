@@ -11,4 +11,17 @@ body { height: 100%; margin: 0; padding: 0; }
     max-width: 250px;
     word-wrap: break-word;
 }
+
+
+#banner{
+    position: absolute;
+    top: 5%;
+    left: 25%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    max-width: 500px;
+    word-wrap: break-word;
+}
 #map-canvas { height: 100%; }
